@@ -6,6 +6,7 @@ node_modules/
 
 # Ignore environment variable files
 .env
+credentials.json
 
 # Ignore build directories
 dist/
