@@ -7,6 +7,6 @@ router.post(
   createUploader("BrainBattle"),
   userController.register
 );
-router.post("/createRoom", userController.createRoom);
+// router.post("/createRoom", userController.createRoom);
 
 module.exports = router;

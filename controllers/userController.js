@@ -1,4 +1,3 @@
-const { nanoid } = require("nanoid");
 const cloudinary = require("cloudinary").v2;
 
 const UserModel = require("../models/users");
@@ -48,44 +47,6 @@ exports.register = async (req, res, next) => {
       status: true,
       message: "Tạo tài khoản thành công",
       data: newUser,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-exports.createRoom = async (req, res, next) => {
-  try {
-    const { name, userId } = req.body;
-    if (!userId) {
-      throwError("Not foud userId");
-    }
-    if (!name || !name.trim()) {
-      throwError("Tên phòng không hợp lệ");
-    }
-    if (name.length > MAX_LENGTH_NAME || name.length < MIN_LENGTH_NAME) {
-      throwError(
-        `Vui lòng nhặp tên phòng trong khoảng ${MIN_LENGTH_NAME} va ${MAX_LENGTH_NAME}`
-      );
-    }
-    const RoomDb = await RoomModel.findOne({ name });
-    if (RoomDb) {
-      throwError("Tên phòng đã tồn tại");
-    }
-    const roomId = nanoid(6);
-    const newRoom = new RoomModel({
-      id: roomId,
-      name: name,
-      owner: userId,
-      users: [userId],
-    });
-
-    await newRoom.save({ validateModifiedOnly: true });
-
-    return res.status(201).json({
-      status: true,
-      message: "Tạo phòng thành công",
-      data: newRoom,
     });
   } catch (error) {
     next(error);

@@ -1,5 +1,11 @@
-const ROOM_MEMBERS = 6;
+const ROOM_MEMBERS = 3;
+const MIN_TOPIC_SELECT = 3;
 const MAX_LENGTH_NAME = 25;
 const MIN_LENGTH_NAME = 3;
 
-module.exports = { ROOM_MEMBERS, MAX_LENGTH_NAME, MIN_LENGTH_NAME };
+module.exports = {
+  ROOM_MEMBERS,
+  MAX_LENGTH_NAME,
+  MIN_LENGTH_NAME,
+  MIN_TOPIC_SELECT,
+};
