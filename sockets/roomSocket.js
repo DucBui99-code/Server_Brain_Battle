@@ -17,7 +17,7 @@ module.exports = (io) => {
 
     socket.on("createRoom", async (data) => {
       try {
-        const { userId, name } = JSON.parse(data);
+        const { userId, name } = data;
 
         if (!userId || !name || name.trim() === "") {
           emitError(socket, "error", "Vui lòng nhập đủ thông tin");
@@ -69,8 +69,8 @@ module.exports = (io) => {
 
         socket.join(roomId);
         io.to(roomId).emit("roomInfo", JSON.stringify(newRoom));
-      } catch {
-        socket.emit("error", { message: "Error creating room" });
+      } catch (error) {
+        socket.emit("error", { message: "sERROR: Tạo phòng thất bại" });
       }
     });
 
@@ -109,7 +109,7 @@ module.exports = (io) => {
 
     socket.on("joinRoom", async (data) => {
       try {
-        const { roomName, userId } = JSON.parse(data);
+        const { roomName, userId } = data;
 
         if (!roomName || !userId || roomName.trim() === "") {
           emitError(socket, "error", "Vui lòng nhập đủ thông tin");
@@ -212,7 +212,7 @@ module.exports = (io) => {
 
     socket.on("leaveRoom", (data) => {
       try {
-        const { roomName, userId } = JSON.parse(data);
+        const { roomName, userId } = data;
         if (!roomName || !userId || roomName.trim() === "") {
           emitError(socket, "error", "Vui lòng nhập đủ thông tin");
           return;
