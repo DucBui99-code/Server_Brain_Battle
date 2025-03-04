@@ -29,7 +29,11 @@ exports.register = async (req, res, next) => {
     const UserDb = await UserModel.findOne({ name: name });
     if (UserDb) {
       await cloudinary.uploader.destroy(fileImage.filename);
-      throwError("Tên đã được sử dụng");
+      return res.status(201).json({
+        status: true,
+        message: "Tạo tài khoản thành công",
+        data: UserDb,
+      });
     }
 
     if (!allowedTypes.includes(fileImage.mimetype)) {

@@ -6,7 +6,7 @@ const { Server } = require("socket.io");
 const connectDB = require("./config/database");
 const errorHandler = require("./middleware/errorHandeler");
 const requestLogger = require("./middleware/requestLogger");
-const roomSocket = require("./sockets/roomSocket");
+const gameSocket = require("./sockets/index");
 
 dotenv.config({ path: "./config.env" });
 
@@ -28,7 +28,7 @@ app.use(cors());
 
 app.use("/v1/quizzApp", require("./routers/index"));
 
-roomSocket(io);
+gameSocket(io);
 
 app.use(errorHandler);
 
